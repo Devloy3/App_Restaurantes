@@ -20,4 +20,4 @@ class Restaurantes:
     def crear_varios_restaurantes(self, restaurantes):
         self.restaurantes.insert_multiple(restaurantes)
 
-    def mostrar_todos_
+    def mostrar_todos_(self)
