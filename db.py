@@ -4,8 +4,7 @@ class Restaurantes:
     db = TinyDB("./db/restaurantes.json")
     restaurantes = db.table("Restaurantes")
 
-    @classmethod
-    def crear_1_restaurante(cls,nombre,decoracion,menu,comida,servicio,precio):
+    def crear_1_restaurante(self,nombre,decoracion,menu,comida,servicio,precio):
         restaurante = {
             "Restaurante": nombre,
             "Decoracion": decoracion,
@@ -15,14 +14,30 @@ class Restaurantes:
             "Precio": precio
         }
 
-        cls.restaurantes.insert(restaurante)
+        self.__class__.restaurantes.insert(restaurante)
 
-    @classmethod
-    def crear_varios_restaurantes(cls, restaurantes):
-        cls.restaurantes.insert_multiple(restaurantes)
+    def crear_varios_restaurantes(self, restaurantes):
+        self.__class__.restaurantes.insert_multiple(restaurantes)
 
-    @classmethod
-    def mostrar_todos_(cls):
-        cls.restaurantes.all()
+    def mostrar_todos_(self):
+        self.__class__.restaurantes.all()
 
-    
+    def mostar_nota_media(self):
+        todos = self.__class__.restaurantes.all()
+        notas = []
+
+        for nombre,decoracion,menu,cocina,servicio,precio in todos:
+            media = float(decoracion) + float(menu) + float(cocina) + float(servicio) + float(precio)
+            nota_final = media / 5 
+            notas.append((nota_final, nombre))
+
+        notas.sort(reverse=True)
+
+        for nota,rest in notas:
+            texto = f"Nombre: {rest} Nota Media: {nota}" 
+        
+        return texto
+            
+    def eliminar_uno(self,nombre):
+        self.__class__.restaurantes.remove(nombre)
+        
