@@ -1,11 +1,11 @@
 from tinydb import TinyDB
 
 class Restaurantes:
-    def __init__(self):
-        self.db = TinyDB("./db/restaurantes.json")
-        self.restaurantes = self.db.table("Restaurantes")
+    db = TinyDB("./db/restaurantes.json")
+    restaurantes = db.table("Restaurantes")
 
-    def crear_1_restaurante(self,nombre,decoracion,menu,comida,servicio,precio):
+    @classmethod
+    def crear_1_restaurante(cls,nombre,decoracion,menu,comida,servicio,precio):
         restaurante = {
             "Restaurante": nombre,
             "Decoracion": decoracion,
@@ -15,9 +15,14 @@ class Restaurantes:
             "Precio": precio
         }
 
-        self.restaurantes.insert(restaurante)
+        cls.restaurantes.insert(restaurante)
 
-    def crear_varios_restaurantes(self, restaurantes):
-        self.restaurantes.insert_multiple(restaurantes)
+    @classmethod
+    def crear_varios_restaurantes(cls, restaurantes):
+        cls.restaurantes.insert_multiple(restaurantes)
 
-    def mostrar_todos_(self)
+    @classmethod
+    def mostrar_todos_(cls):
+        cls.restaurantes.all()
+
+    
