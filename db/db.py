@@ -1,10 +1,11 @@
 from tinydb import TinyDB
 
-class Restaurantes:
+class Conndatabase:
     db = TinyDB("./db/restaurantes.json")
     restaurantes = db.table("Restaurantes")
-
-    def crear_1_restaurante(self,nombre,decoracion,menu,comida,servicio,precio):
+    
+    @classmethod
+    def crear_1_restaurante(cls,nombre,decoracion,menu,comida,servicio,precio):
         restaurante = {
             "Restaurante": nombre,
             "Decoracion": decoracion,
@@ -14,16 +15,19 @@ class Restaurantes:
             "Precio": precio
         }
 
-        self.__class__.restaurantes.insert(restaurante)
+        cls.restaurantes.insert(restaurante)
 
-    def crear_varios_restaurantes(self, restaurantes):
-        self.__class__.restaurantes.insert_multiple(restaurantes)
+    @classmethod
+    def crear_varios_restaurantes(cls, restaurantes):
+        cls.restaurantes.insert_multiple(restaurantes)
 
-    def mostrar_todos_(self):
-        self.__class__.restaurantes.all()
+    @classmethod
+    def mostrar_todos_(cls):
+        cls.restaurantes.all()
 
-    def mostar_nota_media(self):
-        todos = self.__class__.restaurantes.all()
+    @classmethod
+    def mostar_nota_media(cls):
+        todos = cls.restaurantes.all()
         notas = []
 
         for nombre,decoracion,menu,cocina,servicio,precio in todos:
@@ -37,7 +41,8 @@ class Restaurantes:
             texto = f"Nombre: {rest} Nota Media: {nota}" 
         
         return texto
-            
-    def eliminar_uno(self,nombre):
-        self.__class__.restaurantes.remove(nombre)
+
+    @classmethod   
+    def eliminar_uno(cls,nombre):
+        cls.restaurantes.remove(nombre)
         

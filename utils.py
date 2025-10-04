@@ -1,6 +1,4 @@
-from db import Restaurantes
-
-r = Restaurantes()
+from db.db import Conndatabase
 
 notas = [
 {
@@ -77,4 +75,4 @@ notas = [
 }
 ]
 
-r.crear_varios_restaurantes(notas)
+Conndatabase.crear_varios_restaurantes(notas)
