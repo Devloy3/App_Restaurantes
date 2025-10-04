@@ -1,5 +1,5 @@
 .rest
 rest_viejo.json
 __pycache__
-./db/restaurantes.json
 utils.py
+/db/restaurantes.json
