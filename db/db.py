@@ -27,22 +27,21 @@ class Conndatabase:
 
     @classmethod
     def mostar_nota_media(cls):
-        todos = cls.restaurantes.all()
+        todo = cls.restaurantes.all()
         notas = []
 
-        for nombre,decoracion,menu,cocina,servicio,precio in todos:
+        for division in todo:
+            nombre = division["Restaurante"]
+            decoracion = division["Decoracion"]
+            menu = division["Menu"]
+            cocina = division["Comida"]
+            servicio = division["Servicio"]
+            precio = division["Precio"]
             media = float(decoracion) + float(menu) + float(cocina) + float(servicio) + float(precio)
             nota_final = media / 5 
             notas.append((nota_final, nombre))
 
         notas.sort(reverse=True)
-
-        for nota,rest in notas:
-            texto = f"Nombre: {rest} Nota Media: {nota}" 
         
-        return texto
-
-    @classmethod   
-    def eliminar_uno(cls,nombre):
-        cls.restaurantes.remove(nombre)
+        return notas
         
