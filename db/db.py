@@ -23,7 +23,19 @@ class Conndatabase:
 
     @classmethod
     def mostrar_todos_(cls):
-        cls.restaurantes.all()
+        restaurante = []
+        todo = cls.restaurantes.all()
+        for division in todo:
+            nombre = division["Restaurante"]
+            decoracion = division["Decoracion"]
+            menu = division["Menu"]
+            cocina = division["Comida"]
+            servicio = division["Servicio"]
+            precio = division["Precio"]
+            restaurante.append((nombre,decoracion,menu,cocina,servicio,precio))
+
+        return restaurante
+            
 
     @classmethod
     def mostar_nota_media(cls):
