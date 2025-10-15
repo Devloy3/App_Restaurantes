@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -10,10 +10,40 @@
 
 <body>
     <nav class="top-0 w-full z-50 bg-blue-300 p-5">
-        <h1>Puntaje de Restaurantes</h1>
+        <h1>App Restaurantes</h1>
     </nav>
     <main>
-        <table class="mx-auto w-[600px] mt-20 ">
+        <div class="bg-red-300 flex p-5">
+            <form class="bg-green-200 ml-[450px] border border-black" id="formulario">
+                <h2 class="m-2"><strong>Insertar Restaurante</strong></h2>
+                <div class="p-1">
+                    <label for="rest">Nombre del Restaurante:</label>
+                    <input type="text" id="Rest" name="nombre" class="border border-black">
+                </div>
+                <div class="p-1">
+                    <label for="deco">Decoracion:</label>
+                    <input type="text" id="deco" name="decoracion" class="border border-black w-[40px]">
+                </div>
+                <div class="p-1">
+                    <label for="me">Menu:</label>
+                    <input type="text" id="me" name="menu" class="border border-black w-[40px]">
+                </div>
+                 <div class="p-1">
+                    <label for="co">Comida:</label>
+                    <input type="text" id="co" name="comida" class="border border-black w-[40px]">
+                </div>
+                 <div class="p-1">
+                    <label for="se">Servicio:</label>
+                    <input type="text" id="se" name="servicio" class="border border-black w-[40px]">
+                </div>
+                 <div class="p-1">
+                    <label for="pe">Precio:</label>
+                    <input type="text" id="pe" name="precio" class="border border-black w-[40px]">
+                </div>
+                <button type="submit" class="bg-red-500 border border-black m-2 p-2"><strong>Insertar</strong></button>
+            </form>
+        </div>
+        <table class="mx-auto w-[600px] mt-5 mb-5">
             <thead>
                 <tr>
                     <th class="border border-black bg-yellow-200">Restaurante</th>

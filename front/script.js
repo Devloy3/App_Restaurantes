@@ -24,3 +24,26 @@ fetch("http://127.0.0.1:5000")
 .catch(error => {
     console.error("Error al cargar los datos:", error);
 });
+
+const datos = document.getElementById("formulario")
+
+datos.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const data = new FormData(datos)
+    
+    fetch("http://localhost:5000/insertar_restaurante",{
+        method: 'POST',
+        body: data
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Respuesta del servidor:", data);
+        datos.reset()
+    })
+    .catch(error => {
+        console.log("El error ha sido", error);
+    })
+});
+
+
