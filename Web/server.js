@@ -9,6 +9,6 @@ const PORT = prompt('Insertar el puerto el cual quieras tu servidor web:');
 app.use(express.static('public'));
 
 app.listen(PORT,() => {
-    console.log(`Servidor escuchando en http://${direccion}:${PORT}`)
+    console.log(`Servidor escuchando en http://${direccion}:${PORT}/`)
 })
 
