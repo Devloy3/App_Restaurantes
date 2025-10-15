@@ -22,7 +22,7 @@ class Conndatabase:
         cls.restaurantes.insert_multiple(restaurantes)
 
     @classmethod
-    def mostrar_todos_(cls):
+    def mostrar_todos(cls):
         restaurante = []
         todo = cls.restaurantes.all()
         for division in todo:
@@ -32,10 +32,96 @@ class Conndatabase:
             cocina = division["Comida"]
             servicio = division["Servicio"]
             precio = division["Precio"]
-            restaurante.append((nombre,decoracion,menu,cocina,servicio,precio))
+            restaurante.append((nombre,float(decoracion),float(menu),float(cocina),float(servicio),float(precio)))
+        
+        return restaurante
+    
+    
+    
+    @classmethod
+    def ordenar_por_decoracion(cls):
+        restaurante = []
+        todo = cls.restaurantes.all()
+        for division in todo:
+            nombre = division["Restaurante"]
+            decoracion = division["Decoracion"]
+            menu = division["Menu"]
+            cocina = division["Comida"]
+            servicio = division["Servicio"]
+            precio = division["Precio"]
+            restaurante.append((nombre,float(decoracion),float(menu),float(cocina),float(servicio),float(precio)))
+        
+        restaurante.sort(key=lambda x:x[1], reverse=True)
 
         return restaurante
-            
+    
+    @classmethod
+    def ordenar_por_menu(cls):
+        restaurante = []
+        todo = cls.restaurantes.all()
+        for division in todo:
+            nombre = division["Restaurante"]
+            decoracion = division["Decoracion"]
+            menu = division["Menu"]
+            cocina = division["Comida"]
+            servicio = division["Servicio"]
+            precio = division["Precio"]
+            restaurante.append((nombre,float(decoracion),float(menu),float(cocina),float(servicio),float(precio)))
+        
+        restaurante.sort(key=lambda x:x[2], reverse=True)
+
+        return restaurante
+    
+    @classmethod
+    def ordenar_por_cocina(cls):
+        restaurante = []
+        todo = cls.restaurantes.all()
+        for division in todo:
+            nombre = division["Restaurante"]
+            decoracion = division["Decoracion"]
+            menu = division["Menu"]
+            cocina = division["Comida"]
+            servicio = division["Servicio"]
+            precio = division["Precio"]
+            restaurante.append((nombre,float(decoracion),float(menu),float(cocina),float(servicio),float(precio)))
+        
+        restaurante.sort(key=lambda x:x[3], reverse=True)
+
+        return restaurante
+    
+    @classmethod
+    def ordenar_por_servicio(cls):
+        restaurante = []
+        todo = cls.restaurantes.all()
+        for division in todo:
+            nombre = division["Restaurante"]
+            decoracion = division["Decoracion"]
+            menu = division["Menu"]
+            cocina = division["Comida"]
+            servicio = division["Servicio"]
+            precio = division["Precio"]
+            restaurante.append((nombre,float(decoracion),float(menu),float(cocina),float(servicio),float(precio)))
+        
+        restaurante.sort(key=lambda x:x[4], reverse=True)
+
+        return restaurante
+
+    @classmethod
+    def ordenar_por_precio(cls):
+        restaurante = []
+        todo = cls.restaurantes.all()
+        for division in todo:
+            nombre = division["Restaurante"]
+            decoracion = division["Decoracion"]
+            menu = division["Menu"]
+            cocina = division["Comida"]
+            servicio = division["Servicio"]
+            precio = division["Precio"]
+            restaurante.append((nombre,float(decoracion),float(menu),float(cocina),float(servicio),float(precio)))
+        
+        restaurante.sort(key=lambda x:x[5], reverse=True)
+
+        return restaurante        
 
     @classmethod
     def mostar_nota_media(cls):

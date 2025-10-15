@@ -14,7 +14,27 @@ class Api:
 
     @app.route('/mostrar_puntaje', methods=['GET'])
     def mostrar_todo():
-        datos = Conndatabase.mostrar_todos_()
+        datos = Conndatabase.mostrar_todos()
+        return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
+    
+    @app.route('/decoracion', methods=['GET'])
+    def decoracion():
+        datos = Conndatabase.ordenar_por_decoracion()
+        return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
+    
+    @app.route('/menu', methods=['GET'])
+    def menu():
+        datos = Conndatabase.ordenar_por_menu()
+        return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
+    
+    @app.route('/servicio', methods=['GET'])
+    def servicio():
+        datos = Conndatabase.ordenar_por_servicio()
+        return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
+    
+    @app.route('/precio', methods=['GET'])
+    def precio():
+        datos = Conndatabase.ordenar_por_precio()
         return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
     @app.route('/insertar_restaurante', methods=['POST'])
