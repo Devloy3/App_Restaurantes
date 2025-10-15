@@ -3,3 +3,4 @@ rest_viejo.json
 __pycache__
 utils.py
 /db/restaurantes.json
+/Web/node_modules
