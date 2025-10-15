@@ -51,7 +51,8 @@ class Conndatabase:
             precio = division["Precio"]
             media = float(decoracion) + float(menu) + float(cocina) + float(servicio) + float(precio)
             nota_final = media / 5 
-            notas.append((nota_final, nombre))
+            redondeo = round(nota_final, 1)
+            notas.append((redondeo, nombre))
 
         notas.sort(reverse=True)
         
