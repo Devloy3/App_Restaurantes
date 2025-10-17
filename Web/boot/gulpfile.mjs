@@ -1,8 +1,7 @@
 import gulp from 'gulp';
-import open from 'gulp-open';
+import open from 'open';
 
 // Task to open the browser
 gulp.task('open-app', function(){
-  gulp.src('pages/dashboard.html')
-  .pipe(open());
+  return open('/home/eloy/git/restaurantes/Web/boot/pages/dashboard.html');
 });
