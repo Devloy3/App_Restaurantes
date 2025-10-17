@@ -3,10 +3,6 @@ rest_viejo.json
 __pycache__
 utils.py
 /db/restaurantes.json
-/Web/node_modules
-/Web/Plantilla/build
-/Web/Plantilla/node_modules
-/Web/Plantilla/package-lock.json
-/Web/Plantilla/build
-.eslintcache
-react.zip
+/boot/node_modules
+/boot/package-lock.json
+
