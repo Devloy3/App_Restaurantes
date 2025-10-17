@@ -3,6 +3,8 @@ rest_viejo.json
 __pycache__
 utils.py
 /db/restaurantes.json
-/boot/node_modules
-/boot/package-lock.json
+Web/boot/node_modules
+Web/boot/package-lock.json
+Web/boot/LICENSE
+Web/boot/ISSUE_TEMPLATE.md
 
