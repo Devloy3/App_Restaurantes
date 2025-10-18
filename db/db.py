@@ -143,4 +143,24 @@ class Conndatabase:
         notas.sort(reverse=True)
         
         return notas
+    
+    
+    @classmethod
+    def mostar_el_promedio_total(cls):
+        todo = cls.restaurantes.all()
+        largura = len(todo)
+        notas = []
+
+        for division in todo:
+            decoracion = division["Decoracion"]
+            menu = division["Menu"]
+            cocina = division["Comida"]
+            servicio = division["Servicio"]
+            precio = division["Precio"]
+            media = float(decoracion) + float(menu) + float(cocina) + float(servicio) + float(precio)
+            notas.append(media)
+        
+        total = sum(notas) / largura
+        
+        return total
         

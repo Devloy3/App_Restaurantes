@@ -47,8 +47,12 @@ class Api:
         precio = request.form["precio"]
         Conndatabase.crear_1_restaurante(nombre,decoracion,menu,comida,servicio,precio)
         return jsonify ({"Datos": "Datos insertados correctamente"})
-
-    @classmethod
+    
+    @app.route('/mostrar_promedio_total', methods=['GET'])
+    def promedio_total():
+        promedio = Conndatabase.mostar_el_promedio_total()
+        return jsonify({"Promedio Total": promedio})
+    
     def encender(cls):
         cls.app.run()
 
