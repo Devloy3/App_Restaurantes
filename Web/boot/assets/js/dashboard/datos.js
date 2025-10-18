@@ -7,7 +7,7 @@ fetch("http://127.0.0.1:5000/mostrar_promedio_total")
 })
 .then(data => {
     puntuacion = document.getElementById("Puntuacion")
-    puntuacion.textContent = data
+    puntuacion.textContent = data["Promedio Total"]
 });
 
 

@@ -158,9 +158,12 @@ class Conndatabase:
             servicio = division["Servicio"]
             precio = division["Precio"]
             media = float(decoracion) + float(menu) + float(cocina) + float(servicio) + float(precio)
-            notas.append(media)
+            nota_final = media / 5 
+            redondeo = round(nota_final, 1)
+            notas.append(redondeo)
         
         total = sum(notas) / largura
+        redondeo_final = round(total,1)
         
-        return total
+        return redondeo_final
         
