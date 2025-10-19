@@ -1,4 +1,4 @@
-fetch("http://127.0.0.1:5000/mostrar_promedio_total")
+fetch("http://127.0.0.1:5000/nota")
 .then(response => {
     if (!response.ok){
         throw new Error("Ha fallado la API");
@@ -7,11 +7,41 @@ fetch("http://127.0.0.1:5000/mostrar_promedio_total")
 })
 .then(data => {
     puntuacion = document.getElementById("Puntuacion")
-    puntuacion.textContent = data["Promedio Total"]
+    puntuacion.textContent = data["Nota"]
+})
+.catch(error => {
+        console.log("Fallo en el envio de nota", error);
 });
 
+fetch("http://127.0.0.1:5000/nota_fecha")
+.then(response => {
+    if (!response.ok){
+        throw new Error("Ha fallado la API");
+    }
+    return response.json();
+})
+.then(data => {
+    console.log(data)
+    const fecha = [data["Fecha"]]
+    const nota = [data["Nota"]]
+    grafico(fecha,nota)
+})
 
-var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+function grafico(fecha,nota) {
+  const Fecha = JSON.parse(localStorage.getItem("Fecha"));
+  const Nota = JSON.parse(localStorage.getItem("Nota"));
+  Fecha.push(fecha)
+  Nota.push(nota)
+  localStorage.setItem("Nota", JSON.stringify(Nota));
+  localStorage.setItem("Fecha", JSON.stringify(Fecha));
+  console.log("Datos guardados");
+  console.log(Fecha)
+  
+
+  
+
+  var ctx2 = document.getElementById("chart-line").getContext("2d");
   
     var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
 
@@ -22,7 +52,7 @@ var ctx2 = document.getElementById("chart-line").getContext("2d");
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["Enero", "Febrero", "Marzo", "Junio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
+        labels: Fecha,
         datasets: [{
           label: "Promedio",
           tension: 0.4,
@@ -32,7 +62,7 @@ var ctx2 = document.getElementById("chart-line").getContext("2d");
           borderWidth: 3,
           backgroundColor: gradientStroke2,
           fill: true,
-          data: [30, 90],
+          data: Nota,
           maxBarThickness: 6
         },
         ],
@@ -92,4 +122,5 @@ var ctx2 = document.getElementById("chart-line").getContext("2d");
           },
         },
       },
-    });
+    })
+  }

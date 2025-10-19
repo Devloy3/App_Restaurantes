@@ -2,6 +2,7 @@ from flask import Flask,jsonify
 from flask import request
 from flask_cors import CORS
 from db.db import Conndatabase
+from datetime import date
 
 class Api:
     app = Flask(__name__)
@@ -48,10 +49,18 @@ class Api:
         Conndatabase.crear_1_restaurante(nombre,decoracion,menu,comida,servicio,precio)
         return jsonify ({"Datos": "Datos insertados correctamente"})
     
-    @app.route('/mostrar_promedio_total', methods=['GET'])
-    def promedio_total():
+    @app.route('/nota_fecha', methods=['GET'])
+    def promedio_con_fecha():
+        fecha = date.today()
+        hoy = fecha.strftime("%d/%m/%Y")
         promedio = Conndatabase.mostar_el_promedio_total()
-        return jsonify({"Promedio Total": promedio})
+        fl = float(promedio)
+        return jsonify({"Nota": fl,"Fecha": hoy})
+    
+    @app.route('/nota', methods=['GET'])
+    def promedio():
+        promedio = Conndatabase.mostar_el_promedio_total()
+        return jsonify({"Nota": promedio})
     
     def encender(cls):
         cls.app.run()
