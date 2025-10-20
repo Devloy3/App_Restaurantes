@@ -1,4 +1,4 @@
-fetch("http://127.0.0.1:5000/nota")
+fetch("http://127.0.0.1:3000/nota")
 .then(response => {
     if (!response.ok){
         throw new Error("Ha fallado la API");
@@ -13,7 +13,7 @@ fetch("http://127.0.0.1:5000/nota")
         console.log("Fallo en el envio de nota", error);
 });
 
-fetch("http://127.0.0.1:5000/nota_fecha")
+fetch("http://127.0.0.1:3000/nota_fecha")
 .then(response => {
     if (!response.ok){
         throw new Error("Ha fallado la API");
@@ -21,17 +21,11 @@ fetch("http://127.0.0.1:5000/nota_fecha")
     return response.json();
 })
 .then(data => {
-    console.log(data)
-    const Fechas = []
-    const Notas = []
-    const fecha = data["Fecha"]
-    const nota = data["Nota"]
-    Fechas.push(fecha)
-    Notas.push(nota)
-    grafico(Fechas,Notas)
+    const datos = data
+    grafico(datos)
 })
 
-fetch("http://127.0.0.1:5000")
+fetch("http://127.0.0.1:3000")
 .then(response => {
     if (!response.ok){
         throw new Error("Ha fallado la API");
@@ -41,20 +35,60 @@ fetch("http://127.0.0.1:5000")
 .then(data => {
     const tabla = document.getElementById("contenedor");
     data.forEach(element => {
-      const division = document.createElement("div");
+      const fila = document.createElement("tr")
+      const columna = document.createElement("td")
+      
+      const columna_2 = document.createElement("td")
+      columna_2.className = "text-sm"
+      
+      
+      const division = document.createElement("div")
+      division.className = "d-flex px-2 py-1"
+      
+      const division_2 = document.createElement("div");
+      division_2.className = "d-flex flex-column justify-content-center";
+      
       const nombre = document.createElement("h6");
-      division.className = "d-flex flex-column justify-content-center";
       nombre.className = "mb-0 text-sm";
+
+      const nota = document.createElement("span")
+      nota.className = "text-xs font-weight-bold"
+      
       nombre.textContent = element.Nombre || element.nombre;
-      division.appendChild(nombre);
-      tabla.appendChild(division);
+      nota.textContent = element.Nota 
+
+      division_2.appendChild(nombre)
+      division.appendChild(division_2)
+      columna.appendChild(division)
+      fila.appendChild(columna)
+      tabla.appendChild(fila)
+
+      columna_2.appendChild(nota)
+      fila.appendChild(columna_2)
+      tabla.appendChild(fila)
+      
     });
 })
 
 
 
-function grafico(fecha,nota) {
-  
+function grafico(datos) {
+  const notas = JSON.parse(localStorage.getItem("Notas"));
+
+  const fecha = datos.Fecha;
+
+  const historial = notas.some(n => n.Fecha === fecha);
+
+  if (!historial){
+    notas.push(datos);
+    localStorage.setItem(JSON.stringify(datos));
+  } else {
+    console.log("datos no guardados");
+  }
+
+  const fechas = notas.map(n => n.Fecha);
+  const notas_2 = notas.map(n => n.Nota);
+
   var ctx2 = document.getElementById("chart-line").getContext("2d");
   
     var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
@@ -66,7 +100,7 @@ function grafico(fecha,nota) {
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: fecha,
+        labels: fechas,
         datasets: [{
           label: "Promedio",
           tension: 0.4,
@@ -76,7 +110,7 @@ function grafico(fecha,nota) {
           borderWidth: 3,
           backgroundColor: gradientStroke2,
           fill: true,
-          data: nota,
+          data: notas_2,
           maxBarThickness: 6
         },
         ],

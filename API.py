@@ -2,7 +2,7 @@ from flask import Flask,jsonify
 from flask import request
 from flask_cors import CORS
 from db.db import NoRelacional
-from db.db_2 import Relacional
+from datetime import date
 
 class Api:
     app = Flask(__name__)
@@ -51,21 +51,19 @@ class Api:
     
     @app.route('/nota_fecha', methods=['GET'])
     def promedio_con_fecha():
-        promedio = Relacional.mostrar_todos_los_datos()
-        return jsonify(promedio)
+        nota = NoRelacional.mostar_el_promedio_total()
+        fecha = date.today()
+        fecha_string = fecha.strftime("%d-%m-%y")
+        return jsonify({"Nota": nota, "Fecha": fecha_string})
     
     @app.route('/nota', methods=['GET'])
     def promedio():
         promedio = NoRelacional.mostar_el_promedio_total()
         return jsonify({"Nota": promedio})
     
-    @app.route('/insertar_datos_imaginarios', methods=['POST'])
-    def insertar_datos():
-        sql = Relacional()
-        sql.insertar_datos()
-    
+    @classmethod
     def encender(cls):
-        cls.app.run()
+        cls.app.run(port=3000)
 
 
 api = Api()
