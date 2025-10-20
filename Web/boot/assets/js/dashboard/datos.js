@@ -22,25 +22,21 @@ fetch("http://127.0.0.1:5000/nota_fecha")
 })
 .then(data => {
     console.log(data)
-    const fecha = [data["Fecha"]]
-    const nota = [data["Nota"]]
-    grafico(fecha,nota)
+    const Fechas = []
+    const Notas = []
+    const fecha = data["Fecha"]
+    const nota = data["Nota"]
+    Fechas.push(fecha)
+    Notas.push(nota)
+    grafico(Fechas,Notas)
 })
+
+fetch("http://127.0.0.1:5000/insertar_datos_imaginarios")
+
 
 
 function grafico(fecha,nota) {
-  const Fecha = JSON.parse(localStorage.getItem("Fecha"));
-  const Nota = JSON.parse(localStorage.getItem("Nota"));
-  Fecha.push(fecha)
-  Nota.push(nota)
-  localStorage.setItem("Nota", JSON.stringify(Nota));
-  localStorage.setItem("Fecha", JSON.stringify(Fecha));
-  console.log("Datos guardados");
-  console.log(Fecha)
   
-
-  
-
   var ctx2 = document.getElementById("chart-line").getContext("2d");
   
     var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
@@ -52,7 +48,7 @@ function grafico(fecha,nota) {
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: Fecha,
+        labels: fecha,
         datasets: [{
           label: "Promedio",
           tension: 0.4,
@@ -62,7 +58,7 @@ function grafico(fecha,nota) {
           borderWidth: 3,
           backgroundColor: gradientStroke2,
           fill: true,
-          data: Nota,
+          data: nota,
           maxBarThickness: 6
         },
         ],
@@ -123,4 +119,4 @@ function grafico(fecha,nota) {
         },
       },
     })
-  }
+  };

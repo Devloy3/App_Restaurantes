@@ -7,4 +7,5 @@ Web/boot/node_modules
 Web/boot/package-lock.json
 Web/boot/LICENSE
 Web/boot/ISSUE_TEMPLATE.md
+/db/nota_media.db
 

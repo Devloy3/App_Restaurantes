@@ -1,7 +1,7 @@
 from tinydb import TinyDB
 
-class Conndatabase:
-    db = TinyDB("./db/restaurantes.json")
+class NoRelacional:
+    db = TinyDB("./restaurantes.json")
     restaurantes = db.table("Restaurantes")
     
     @classmethod
