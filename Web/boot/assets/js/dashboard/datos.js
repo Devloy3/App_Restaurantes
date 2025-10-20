@@ -31,7 +31,25 @@ fetch("http://127.0.0.1:5000/nota_fecha")
     grafico(Fechas,Notas)
 })
 
-fetch("http://127.0.0.1:5000/insertar_datos_imaginarios")
+fetch("http://127.0.0.1:5000")
+.then(response => {
+    if (!response.ok){
+        throw new Error("Ha fallado la API");
+    }
+    return response.json();
+})
+.then(data => {
+    const tabla = document.getElementById("contenedor");
+    data.forEach(element => {
+      const division = document.createElement("div");
+      const nombre = document.createElement("h6");
+      division.className = "d-flex flex-column justify-content-center";
+      nombre.className = "mb-0 text-sm";
+      nombre.textContent = element.Nombre || element.nombre;
+      division.appendChild(nombre);
+      tabla.appendChild(division);
+    });
+})
 
 
 
