@@ -52,7 +52,7 @@ class Api:
     @app.route('/nota_fecha', methods=['GET'])
     def promedio_con_fecha():
         promedio = Relacional.mostrar_todos_los_datos()
-        return jsonify({"Nota": promedio["Nota"], "Fecha": promedio["Fecha"]})
+        return jsonify(promedio)
     
     @app.route('/nota', methods=['GET'])
     def promedio():

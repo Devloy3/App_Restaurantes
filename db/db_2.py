@@ -1,10 +1,10 @@
 import sqlite3
 from datetime import date
-from db import NoRelacional
+from db.db import NoRelacional
 
 class Relacional:
     def __init__(self):
-        self.conn = sqlite3.connect("nota_media.db")
+        self.conn = sqlite3.connect("./db/nota_media.db")
         self.cursor = self.conn.cursor()
     
     def construir_tabla(self):
