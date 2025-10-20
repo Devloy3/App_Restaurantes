@@ -31,7 +31,6 @@ class Relacional:
         else:
             print("La nota ya está registrada para esta fecha. No se insertó nada.")
 
-    def mostrar_todos_los_datos(self):
         self.cursor.execute("SELECT * FROM notas")
         resultados = self.cursor.fetchall()
         notas_fecha = []

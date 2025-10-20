@@ -73,7 +73,8 @@ fetch("http://127.0.0.1:3000")
 
 
 function grafico(datos) {
-  const notas = JSON.parse(localStorage.getItem("Notas"));
+  
+  const notas = JSON.parse(localStorage.getItem("Notas")) || [];
 
   const fecha = datos.Fecha;
 
@@ -81,13 +82,17 @@ function grafico(datos) {
 
   if (!historial){
     notas.push(datos);
-    localStorage.setItem(JSON.stringify(datos));
+    localStorage.setItem("Notas", JSON.stringify(datos));
   } else {
     console.log("datos no guardados");
   }
 
-  const fechas = notas.map(n => n.Fecha);
-  const notas_2 = notas.map(n => n.Nota);
+  const Fechas = notas.map(n => n.Fecha);
+  const Notas_2 = notas.map(n => n.Nota);
+
+
+  const FechasArray = Object.values(Fechas);
+  const NotasArray = Object.values(Notas_2);
 
   var ctx2 = document.getElementById("chart-line").getContext("2d");
   
@@ -100,7 +105,7 @@ function grafico(datos) {
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: fechas,
+        labels: FechasArray,
         datasets: [{
           label: "Promedio",
           tension: 0.4,
@@ -110,7 +115,7 @@ function grafico(datos) {
           borderWidth: 3,
           backgroundColor: gradientStroke2,
           fill: true,
-          data: notas_2,
+          data: NotasArray,
           maxBarThickness: 6
         },
         ],
