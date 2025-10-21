@@ -21,8 +21,12 @@ fetch("http://127.0.0.1:3000/nota_fecha")
     return response.json();
 })
 .then(data => {
-    const datos = data
-    grafico(datos)
+    const nota = data["Nota"]
+    const fecha = data["Fecha"]
+    console.log(fecha)
+    console.log(nota)
+    console.log(typeof fecha); 
+    grafico(fecha,nota)
 })
 
 fetch("http://127.0.0.1:3000")
@@ -72,27 +76,25 @@ fetch("http://127.0.0.1:3000")
 
 
 
-function grafico(datos) {
+function grafico(fecha,nota) {
   
-  const notas = JSON.parse(localStorage.getItem("Notas")) || [];
+  const Notas = JSON.parse(localStorage.getItem("Notas")) || [];
+  const Fechas = JSON.parse(localStorage.getItem("Fechas")) || [];
+  
+  const historial = Fechas.some(n => n === fecha);
 
-  const fecha = datos.Fecha;
-
-  const historial = notas.some(n => n.Fecha === fecha);
-
-  if (!historial){
-    notas.push(datos);
-    localStorage.setItem("Notas", JSON.stringify(datos));
+  if (!historial) {
+    Notas.push(nota)
+    Fechas.push(fecha)
+    localStorage.setItem("Notas", JSON.stringify(Notas))
+    localStorage.setItem("Fechas", JSON.stringify(Fechas))
   } else {
-    console.log("datos no guardados");
+    console.log("No se ha guardado la fecha")
   }
 
-  const Fechas = notas.map(n => n.Fecha);
-  const Notas_2 = notas.map(n => n.Nota);
 
 
-  const FechasArray = Object.values(Fechas);
-  const NotasArray = Object.values(Notas_2);
+
 
   var ctx2 = document.getElementById("chart-line").getContext("2d");
   
@@ -105,7 +107,7 @@ function grafico(datos) {
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: FechasArray,
+        labels: Fechas,
         datasets: [{
           label: "Promedio",
           tension: 0.4,
@@ -115,7 +117,7 @@ function grafico(datos) {
           borderWidth: 3,
           backgroundColor: gradientStroke2,
           fill: true,
-          data: NotasArray,
+          data: Notas,
           maxBarThickness: 6
         },
         ],
