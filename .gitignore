@@ -3,9 +3,7 @@ rest_viejo.json
 __pycache__
 utils.py
 /db/restaurantes.json
-Web/boot/node_modules
-Web/boot/package-lock.json
-Web/boot/LICENSE
-Web/boot/ISSUE_TEMPLATE.md
+Web/node_modules
+Web/package-lock.json
 /db/nota_media.db
 
