@@ -1,3 +1,26 @@
+document.getElementById("Formulario").addEventListener("submit", function(e){
+  e.preventDefault()
+
+ const formData = new FormData(this);
+
+    fetch('http://localhost:3000/insertar_restaurante', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Error en la respuesta del servidor');
+      return response.json(); 
+    })
+    .then(data => {
+      alert('Restaurante insertado correctamente');
+      console.log(data);
+    })
+    .catch(error => {
+      alert('Hubo un error al enviar los datos');
+      console.error(error);
+    });
+});
+
 fetch("http://127.0.0.1:3000/nota")
 .then(response => {
     if (!response.ok){

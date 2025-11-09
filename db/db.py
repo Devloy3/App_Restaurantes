@@ -8,11 +8,11 @@ class NoRelacional:
     def crear_1_restaurante(cls,nombre,decoracion,menu,comida,servicio,precio):
         restaurante = {
             "Restaurante": nombre,
-            "Decoracion": float(decoracion),
-            "Menu": float(menu),
-            "Comida": float(comida),
-            "Servicio": float(servicio),
-            "Precio": float(precio)
+            "Decoracion": decoracion,
+            "Menu": menu,
+            "Comida": comida,
+            "Servicio": servicio,
+            "Precio": precio
         }
 
         cls.restaurantes.insert(restaurante)
