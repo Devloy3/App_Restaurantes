@@ -40,7 +40,7 @@ class Api:
     
     @app.route('/insertar_restaurante', methods=['POST'])
     def insertar_restaurante():
-        nombre = float(request.form.get("nombre"))
+        nombre = request.form.get("nombre")
         decoracion = float(request.form.get("decoracion"))
         menu = float(request.form.get("menu"))
         comida = float(request.form.get("comida"))
