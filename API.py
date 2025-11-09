@@ -54,6 +54,8 @@ class Api:
                          "Servicio": servicio,
                          "Precio": precio
                          })
+       
+        print(request.form)
     
     @app.route('/nota_fecha', methods=['GET'])
     def promedio_con_fecha():
