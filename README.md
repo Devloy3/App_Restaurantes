@@ -1,4 +1,4 @@
-# APP Restaurantes 
+# PaladarTop
 
 Este proyecto busca una app de puntaje diferente a the fork o tripadvisor, 
 o que google maps, busca un sistema de puntuaje que para que el usuario pueda
