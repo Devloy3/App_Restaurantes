@@ -1,10 +1,10 @@
 <p align="center">
   <img src="./Frontend/assets/img/PaladarTop.png" alt="Descripción de la imagen" width="400"/>
 </p>
-
+<br/>
 
 Este proyecto busca una app de puntaje diferente a the fork o tripadvisor, 
-o que google maps, busca un sistema de puntuaje que para que el usuario pueda
+o que google maps, busca un sistema de puntuaje donde el usuario pueda
 ver bien si ese restaurante, le puede merecer la pena o mas bien no visitarlo.
 
 Por eso el puntuaje se basa en:
