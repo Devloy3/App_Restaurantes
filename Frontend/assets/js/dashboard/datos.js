@@ -1,5 +1,5 @@
 document.getElementById("Formulario").addEventListener("submit", function(e){
-  e.preventDefault()
+ e.preventDefault()
 
  const formData = new FormData(this);
 
@@ -103,21 +103,12 @@ function grafico(fecha,nota) {
   
   const Notas = JSON.parse(localStorage.getItem("Notas")) || [];
   const Fechas = JSON.parse(localStorage.getItem("Fechas")) || [];
-  
-  const historial = Fechas.some(n => n === fecha);
 
-  if (!historial) {
-    Notas.push(nota)
-    Fechas.push(fecha)
-    localStorage.setItem("Notas", JSON.stringify(Notas))
-    localStorage.setItem("Fechas", JSON.stringify(Fechas))
-  } else {
-    console.log("No se ha guardado la fecha")
-  }
-
-
-
-
+  Notas.push(nota)
+  Fechas.push(fecha)
+    
+  localStorage.setItem("Notas", JSON.stringify(Notas))
+  localStorage.setItem("Fechas", JSON.stringify(Fechas))
 
   var ctx2 = document.getElementById("chart-line").getContext("2d");
   
