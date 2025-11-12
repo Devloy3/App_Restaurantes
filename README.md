@@ -1,4 +1,4 @@
-# PaladarTop ![Logo](./Frontend/assets/img/PaladarTop.png)
+![Logo](./Frontend/assets/img/PaladarTop.png)
 
 Este proyecto busca una app de puntaje diferente a the fork o tripadvisor, 
 o que google maps, busca un sistema de puntuaje que para que el usuario pueda
