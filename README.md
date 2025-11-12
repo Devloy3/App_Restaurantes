@@ -1,4 +1,4 @@
-# PaladarTop
+# PaladarTop ![Logo](./Frontend/assets/img/PaladarTop.png)
 
 Este proyecto busca una app de puntaje diferente a the fork o tripadvisor, 
 o que google maps, busca un sistema de puntuaje que para que el usuario pueda
@@ -11,6 +11,9 @@ Por eso el puntuaje se basa en:
 3. Como de buena esta la comida
 4. El servicio que calidad a tenido
 5. El precio es bueno o malo
+
+
+![foto](./Frontend/assets/img/captura.png)
 
 ## Instalacion
 
