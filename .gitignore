@@ -1,10 +1,6 @@
 .pal
-rest_viejo.json
 __pycache__
-/utils
 /db/restaurantes.json
 /db/restaurantes.db
-Web/node_modules
-Web/package-lock.json
 /db/nota_media.db
 
