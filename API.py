@@ -1,8 +1,10 @@
 from flask import Flask,jsonify
 from flask import request
 from flask_cors import CORS
-
+from db.db import Relacional
 from datetime import date
+
+db = Relacional()
 
 class Api:
     app = Flask(__name__)
@@ -10,22 +12,22 @@ class Api:
     
     @app.route('/', methods=['GET'])
     def mostrar_nota_media():
-    
+
         return jsonify([{"Nombre": nombre, "Nota": nota } for nota,nombre in datos])
 
     @app.route('/mostrar_puntaje', methods=['GET'])
     def mostrar_todo():
-        
+        datos = db.mostrar_restaurantes()
         return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
     @app.route('/decoracion', methods=['GET'])
     def decoracion():
-
+        datos = db.mostrar_decoracion()
         return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
     @app.route('/menu', methods=['GET'])
     def menu():
-        
+        datos = db.mostrar_menu()
         return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
     @app.route('/servicio', methods=['GET'])
@@ -46,7 +48,7 @@ class Api:
         comida = float(request.form.get("comida"))
         servicio = float(request.form.get("servicio"))
         precio = float(request.form.get("precio"))
-        
+        db.crear_restaurante(nombre,decoracion,menu,comida,servicio,precio)
         return jsonify ({"Nombre": nombre,
                          "Decoracion": decoracion,
                          "Menu": menu,
