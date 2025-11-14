@@ -1,60 +1,26 @@
-from tinydb import TinyDB
+import sqlite3
 
 class NoRelacional:
-    db = TinyDB("./db/restaurantes.json")
-    restaurantes = db.table("Restaurantes")
+    conn = sqlite3.connect("./db/restaurantes.db")
+    cursor = conn.cursor()
     
     @classmethod
-    def crear_1_restaurante(cls,nombre,decoracion,menu,comida,servicio,precio):
-        restaurante = {
-            "Restaurante": nombre,
-            "Decoracion": decoracion,
-            "Menu": menu,
-            "Comida": comida,
-            "Servicio": servicio,
-            "Precio": precio
-        }
-
-        cls.restaurantes.insert(restaurante)
-
-    @classmethod
-    def crear_varios_restaurantes(cls, restaurantes):
-        cls.restaurantes.insert_multiple(restaurantes)
-
+    def crear_restaurante(cls,nombre,decoracion,menu,comida,servicio,precio):
+        cls.cursor.execute("INSERT INTO restaurantes(Restaurante,Decoracion,Menu,Comida,Servicio,Precio) VALUES (?,?,?,?,?,?)",(nombre,decoracion,menu,comida,servicio,precio))
+        cls.conn.commit()
+    
     @classmethod
     def mostrar_todos(cls):
-        restaurante = []
-        todo = cls.restaurantes.all()
-        for division in todo:
-            nombre = division["Restaurante"]
-            decoracion = division["Decoracion"]
-            menu = division["Menu"]
-            cocina = division["Comida"]
-            servicio = division["Servicio"]
-            precio = division["Precio"]
-            restaurante.append((nombre,float(decoracion),float(menu),float(cocina),float(servicio),float(precio)))
-        
-        return restaurante
-    
-    
+        cls.cursor.execute("SELECT * FROM restaurantes;")
+        todo = cls.cursor.fetchall()
+        return todo
     
     @classmethod
     def ordenar_por_decoracion(cls):
-        restaurante = []
-        todo = cls.restaurantes.all()
-        for division in todo:
-            nombre = division["Restaurante"]
-            decoracion = division["Decoracion"]
-            menu = division["Menu"]
-            cocina = division["Comida"]
-            servicio = division["Servicio"]
-            precio = division["Precio"]
-            restaurante.append((nombre,float(decoracion),float(menu),float(cocina),float(servicio),float(precio)))
-        
-        restaurante.sort(key=lambda x:x[1], reverse=True)
-
-        return restaurante
-    
+       cls.cursor.execute("SELECT * FROM restaurantes ORDER BY Decoracion;")
+       todo = cls.cursor.fetchall()
+       return todo
+   
     @classmethod
     def ordenar_por_menu(cls):
         restaurante = []
@@ -166,4 +132,12 @@ class NoRelacional:
         redondeo_final = round(total,1)
         
         return redondeo_final
+    
+
+     
+
+            
+
+
+        
         

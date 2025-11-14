@@ -46,7 +46,7 @@ class Api:
         comida = float(request.form.get("comida"))
         servicio = float(request.form.get("servicio"))
         precio = float(request.form.get("precio"))
-        NoRelacional.crear_1_restaurante(nombre,decoracion,menu,comida,servicio,precio)
+        NoRelacional.crear_restaurante(nombre,decoracion,menu,comida,servicio,precio)
         return jsonify ({"Nombre": nombre,
                          "Decoracion": decoracion,
                          "Menu": menu,
