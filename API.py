@@ -12,7 +12,7 @@ class Api:
     
     @app.route('/', methods=['GET'])
     def mostrar_nota_media():
-
+        datos = db.promedio_restaurante()
         return jsonify([{"Nombre": nombre, "Nota": nota } for nota,nombre in datos])
 
     @app.route('/mostrar_puntaje', methods=['GET'])
@@ -32,12 +32,12 @@ class Api:
     
     @app.route('/servicio', methods=['GET'])
     def servicio():
-        
+        datos = db.mostrar_servicio()
         return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
     @app.route('/precio', methods=['GET'])
     def precio():
-      
+        datos = db.mostrar_precio()
         return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
     @app.route('/insertar_restaurante', methods=['POST'])
@@ -60,14 +60,14 @@ class Api:
     
     @app.route('/nota_fecha', methods=['GET'])
     def promedio_con_fecha():
-
+        nota = db.promedio_total()
         fecha = date.today()
         fecha_string = fecha.strftime("%d-%m-%y")
         return jsonify({"Nota": nota, "Fecha": fecha_string})
     
     @app.route('/nota', methods=['GET'])
     def promedio():
-        
+        promedio = db.promedio_total()
         return jsonify({"Nota": promedio})
     
     @classmethod
