@@ -4,52 +4,55 @@ from flask_cors import CORS
 from db.db import Relacional
 from datetime import date
 
-db = Relacional()
 
 class Api:
-    app = Flask(__name__)
-    CORS(app)
+    def __init__(self):
+        self.app = Flask(__name__)
+        CORS(self.app)
+        self.db = Relacional()
+        self.rutas
     
-    @app.route('/', methods=['GET'])
-    def mostrar_nota_media():
-        datos = db.promedio_restaurante()
-        return jsonify([{"Nombre": nombre, "Nota": nota } for nota,nombre in datos])
+    def rutas(self):
+        @self.app.route('/', methods=['GET'])
+        def mostrar_nota_media():
+            datos = self.db.promedio_restaurante()
+            return jsonify([{"Nombre": nombre, "Nota": nota } for nota,nombre in datos])
 
-    @app.route('/mostrar_puntaje', methods=['GET'])
-    def mostrar_todo():
-        datos = db.mostrar_restaurantes()
-        return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
+        @self.app.route('/mostrar_puntaje', methods=['GET'])
+        def mostrar_todo():
+            datos = self.db.mostrar_restaurantes()
+            return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
-    @app.route('/decoracion', methods=['GET'])
-    def decoracion():
-        datos = db.mostrar_decoracion()
-        return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
+        @self.app.route('/decoracion', methods=['GET'])
+        def decoracion():
+            datos = self.db.mostrar_decoracion()
+            return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
-    @app.route('/menu', methods=['GET'])
-    def menu():
-        datos = db.mostrar_menu()
-        return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
+        @self.app.route('/menu', methods=['GET'])
+        def menu():
+            datos = self.db.mostrar_menu()
+            return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
-    @app.route('/servicio', methods=['GET'])
-    def servicio():
-        datos = db.mostrar_servicio()
-        return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
+        @self.app.route('/servicio', methods=['GET'])
+        def servicio():
+            datos = self.db.mostrar_servicio()
+            return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
-    @app.route('/precio', methods=['GET'])
-    def precio():
-        datos = db.mostrar_precio()
-        return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
+        @self.app.route('/precio', methods=['GET'])
+        def precio():
+            datos = self.db.mostrar_precio()
+            return jsonify([{"Nombre": nombre, "Decoracion": decoracion, "Menu": menu, "Cocina": cocina, "Servicio": servicio, "Precio": precio} for nombre,decoracion,menu,cocina,servicio,precio in datos])
     
-    @app.route('/insertar_restaurante', methods=['POST'])
-    def insertar_restaurante():
-        nombre = request.form.get("nombre")
-        decoracion = float(request.form.get("decoracion"))
-        menu = float(request.form.get("menu"))
-        comida = float(request.form.get("comida"))
-        servicio = float(request.form.get("servicio"))
-        precio = float(request.form.get("precio"))
-        db.crear_restaurante(nombre,decoracion,menu,comida,servicio,precio)
-        return jsonify ({"Nombre": nombre,
+        @self.app.route('/insertar_restaurante', methods=['POST'])
+        def insertar_restaurante():
+            nombre = request.form.get("nombre")
+            decoracion = float(request.form.get("decoracion"))
+            menu = float(request.form.get("menu"))
+            comida = float(request.form.get("comida"))
+            servicio = float(request.form.get("servicio"))
+            precio = float(request.form.get("precio"))
+            self.db.crear_restaurante(nombre,decoracion,menu,comida,servicio,precio)
+            return jsonify ({"Nombre": nombre,
                          "Decoracion": decoracion,
                          "Menu": menu,
                          "Comida": comida,
@@ -58,21 +61,21 @@ class Api:
                          })
        
     
-    @app.route('/nota_fecha', methods=['GET'])
-    def promedio_con_fecha():
-        nota = db.promedio_total()
-        fecha = date.today()
-        fecha_string = fecha.strftime("%d-%m-%y")
-        return jsonify({"Nota": nota, "Fecha": fecha_string})
+        @self.app.route('/nota_fecha', methods=['GET'])
+        def promedio_con_fecha():
+            nota = self.db.promedio_total()
+            fecha = date.today()
+            fecha_string = fecha.strftime("%d-%m-%y")
+            return jsonify({"Nota": nota, "Fecha": fecha_string})
     
-    @app.route('/nota', methods=['GET'])
-    def promedio():
-        promedio = db.promedio_total()
-        return jsonify({"Nota": promedio})
+        @self.app.route('/nota', methods=['GET'])
+        def promedio():
+            promedio = self.db.promedio_total()
+            return jsonify({"Nota": promedio})
     
-    @classmethod
-    def encender(cls):
-        cls.app.run(port=3000)
+    
+    def encender(self):
+        self.app.run(port=3000)
 
 
 api = Api()
