@@ -1,51 +1,80 @@
 import sqlite3
 
 class Relacional:
-    def __init__(self):
-        self.conn = sqlite3.connect("restaurantes.db")
-        self.cursor = self.conn.cursor()
+    def __init__(self, db_path="./db/restaurantes.db"):
+        self.db_path = db_path
+
+    def conectar(self):
+        return sqlite3.connect(self.db_path)
 
     def crear_restaurante(self,nombre,decoracion,menu,comida,servicio,precio):
-        self.cursor.execute("INSERT INTO restaurante(Restaurante,Decoracion,Menu,Comida,Servicio,Precio) VALUES (?,?,?,?,?,?)", (nombre,decoracion,menu,comida,servicio,precio))
-        self.conn.commit()
+        conn = self.conectar()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO restaurante(Restaurante,Decoracion,Menu,Comida,Servicio,Precio) VALUES (?,?,?,?,?,?)", (nombre,decoracion,menu,comida,servicio,precio))
+        conn.commit()
+        conn.close()
     
     def mostrar_restaurantes(self):
-        self.cursor.execute("SELECT * FROM restaurantes")
-        todo = self.cursor.fetchall()
+        conn = self.conectar()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM restaurantes")
+        todo = cursor.fetchall()
+        conn.close()
         return todo
     
     def mostrar_decoracion(self):
-        self.cursor.execute("SELECT * FROM restaurantes ORDER BY Decoracion")
-        decoracion = self.cursor.fetchall()
+        conn = self.conectar()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM restaurantes ORDER BY Decoracion")
+        decoracion = cursor.fetchall()
+        conn.close()
         return decoracion
     
     def mostrar_menu(self):
-        self.cursor.execute("SELECT * FROM restaurantes ORDER BY Menu")
-        menu = self.cursor.fetchall()
+        conn = self.conectar()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM restaurantes ORDER BY Menu")
+        menu = cursor.fetchall()
+        conn.close()
         return menu
     
     def mostrar_comida(self):
-        self.cursor.execute("SELECT * FROM restaurantes ORDER BY Comida")
-        comida = self.cursor.fetchall()
+        conn = self.conectar()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM restaurantes ORDER BY Comida")
+        comida = cursor.fetchall()
+        conn.close()
         return comida
     
     def mostrar_servicio(self):
-        self.cursor.execute("SELECT * FROM restaurantes ORDER BY Servicio")
-        servicio = self.cursor.fetchall()
+        conn = self.conectar()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM restaurantes ORDER BY Servicio")
+        servicio = cursor.fetchall()
+        conn.close()
         return servicio
     
     def mostrar_precio(self):
-        self.cursor.execute("SELECT * FROM restaurantes ORDER BY Precio")
-        precio = self.cursor.fetchall()
+        conn = self.conectar()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM restaurantes ORDER BY Precio")
+        precio = cursor.fetchall()
+        conn.close()
         return precio
     
     def promedio_restaurante(self):
-        self.cursor.execute("SELECT Restaurante,(Decoracion+Menu+Comida+Servicio+Precio/5) AS Promedio FROM restaurantes")
-        promedio = self.cursor.fetchall()
+        conn = self.conectar()
+        cursor = conn.cursor()
+        cursor.execute("SELECT Restaurante,(Decoracion+Menu+Comida+Servicio+Precio/5) AS Promedio FROM restaurantes")
+        promedio = cursor.fetchall()
+        conn.close()
         return promedio
     
     def promedio_total(self):
-        self.cursor.execute("SELECT (AVG(Decoracion)+AVG(Menu)+AVG(Comida)+AVG(Servicio)+AVG(Precio)/5) AS promedio_total FROM restaurantes")
-        total = self.cursor.fetchall()
+        conn = self.conectar()
+        cursor = conn.cursor()
+        cursor.execute("SELECT (AVG(Decoracion)+AVG(Menu)+AVG(Comida)+AVG(Servicio)+AVG(Precio)/5) AS promedio_total FROM restaurantes")
+        total = cursor.fetchone()
+        conn.close()
         return total
     
