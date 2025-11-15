@@ -24,3 +24,28 @@ class Relacional:
         menu = self.cursor.fetchall()
         return menu
     
+    def mostrar_comida(self):
+        self.cursor.execute("SELECT * FROM restaurantes ORDER BY Comida")
+        comida = self.cursor.fetchall()
+        return comida
+    
+    def mostrar_servicio(self):
+        self.cursor.execute("SELECT * FROM restaurantes ORDER BY Servicio")
+        servicio = self.cursor.fetchall()
+        return servicio
+    
+    def mostrar_precio(self):
+        self.cursor.execute("SELECT * FROM restaurantes ORDER BY Precio")
+        precio = self.cursor.fetchall()
+        return precio
+    
+    def promedio_restaurante(self):
+        self.cursor.execute("SELECT Restaurante,(Decoracion+Menu+Comida+Servicio+Precio/5) AS Promedio FROM restaurantes")
+        promedio = self.cursor.fetchall()
+        return promedio
+    
+    def promedio_total(self):
+        self.cursor.execute("SELECT (AVG(Decoracion)+AVG(Menu)+AVG(Comida)+AVG(Servicio)+AVG(Precio)/5) AS promedio_total FROM restaurantes")
+        total = self.cursor.fetchall()
+        return total
+    
