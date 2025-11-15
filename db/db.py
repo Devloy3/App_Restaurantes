@@ -10,14 +10,14 @@ class Relacional:
     def crear_restaurante(self,nombre,decoracion,menu,comida,servicio,precio):
         conn = self.conectar()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO restaurante(Restaurante,Decoracion,Menu,Comida,Servicio,Precio) VALUES (?,?,?,?,?,?)", (nombre,decoracion,menu,comida,servicio,precio))
+        cursor.execute("INSERT INTO restaurantes(Restaurante,Decoracion,Menu,Comida,Servicio,Precio) VALUES (?,?,?,?,?,?)", (nombre,decoracion,menu,comida,servicio,precio))
         conn.commit()
         conn.close()
     
     def mostrar_restaurantes(self):
         conn = self.conectar()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM restaurantes")
+        cursor.execute("SELECT Restaurante,Decoracion,Menu,Comida,Servicio,Precio FROM restaurantes")
         todo = cursor.fetchall()
         conn.close()
         return todo
@@ -65,7 +65,7 @@ class Relacional:
     def promedio_restaurante(self):
         conn = self.conectar()
         cursor = conn.cursor()
-        cursor.execute("SELECT Restaurante,(Decoracion+Menu+Comida+Servicio+Precio/5) AS Promedio FROM restaurantes")
+        cursor.execute("SELECT Restaurante, ROUND((Decoracion+Menu+Comida+Servicio+Precio)/5,1) AS Promedio FROM restaurantes ORDER BY Promedio DESC")
         promedio = cursor.fetchall()
         conn.close()
         return promedio
@@ -73,8 +73,9 @@ class Relacional:
     def promedio_total(self):
         conn = self.conectar()
         cursor = conn.cursor()
-        cursor.execute("SELECT (AVG(Decoracion)+AVG(Menu)+AVG(Comida)+AVG(Servicio)+AVG(Precio)/5) AS promedio_total FROM restaurantes")
+        cursor.execute("SELECT (AVG(Decoracion)+AVG(Menu)+AVG(Comida)+AVG(Servicio)+AVG(Precio))/5 AS promedio_total FROM restaurantes")
         total = cursor.fetchone()
+        final = round(total[0],2)
         conn.close()
-        return total
+        return final
     

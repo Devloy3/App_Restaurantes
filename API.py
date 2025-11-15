@@ -10,13 +10,14 @@ class Api:
         self.app = Flask(__name__)
         CORS(self.app)
         self.db = Relacional()
-        self.rutas
+        self.rutas()
     
     def rutas(self):
+
         @self.app.route('/', methods=['GET'])
         def mostrar_nota_media():
             datos = self.db.promedio_restaurante()
-            return jsonify([{"Nombre": nombre, "Nota": nota } for nota,nombre in datos])
+            return jsonify([{"Nombre": nombre, "Nota": nota } for nombre,nota in datos])
 
         @self.app.route('/mostrar_puntaje', methods=['GET'])
         def mostrar_todo():
